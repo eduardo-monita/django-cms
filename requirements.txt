@@ -1,0 +1,3 @@
+django==4.2.*
+django-cms==4.1.0rc4
+django-sekizai==4.1.0
