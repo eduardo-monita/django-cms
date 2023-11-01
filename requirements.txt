@@ -1,3 +1,13 @@
 django==4.2.*
 django-cms==4.1.0rc4
 django-sekizai==4.1.0
+django-filer==3.1.0
+django-mptt==0.15.0
+djangocms-text-ckeditor==5.1.4
+djangocms-link==3.1.1
+djangocms-file==3.0.1
+djangocms-picture==4.1.1
+djangocms-video==3.0.0
+djangocms-googlemap==2.1.1
+djangocms-snippet==3.1.1
+djangocms-style==3.0.0

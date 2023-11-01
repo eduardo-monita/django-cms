@@ -48,7 +48,25 @@ INSTALLED_APPS = [
     'menus',
     'treebeard',
 
+    # Sekizai
     'sekizai',
+
+    # Plugins
+
+    # Django Filer
+    'filer',
+    'easy_thumbnails',
+    'mptt',
+
+    # Others
+    'djangocms_text_ckeditor',
+    'djangocms_link',
+    'djangocms_file',
+    'djangocms_picture',
+    'djangocms_video',
+    'djangocms_googlemap',
+    'djangocms_snippet',
+    'djangocms_style',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +144,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = [
-    ("pt-BR", _("Português")),
+    ("pt-br", _("Português")),
+    ("en-us", _("English")),
 ]
 
 TIME_ZONE = 'UTC'
@@ -160,3 +179,12 @@ CMS_CONFIRM_VERSION4 = True
 CMS_TEMPLATES = [
     ('home.html', 'Home page template'),
 ]
+
+# Django Filer
+THUMBNAIL_HIGH_RESOLUTION = True
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters'
+)
