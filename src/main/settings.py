@@ -30,8 +30,55 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+SHARED_APPS = (
+    # Tenents
+    'django_tenants',
 
-INSTALLED_APPS = [
+    # Apps
+    'customers',
+
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.contenttypes',
+)
+
+TENANT_APPS = (
+    # CMS
+    'djangocms_admin_style',
+    'cms',
+    'menus',
+    'treebeard',
+
+    # Sekizai
+    'sekizai',
+
+    # Django Filer Plugin
+    'filer',
+    'easy_thumbnails',
+    'mptt',
+
+    # Others Plugins
+    'djangocms_text_ckeditor',
+    'djangocms_link',
+    'djangocms_file',
+    'djangocms_picture',
+    'djangocms_video',
+    'djangocms_googlemap',
+    'djangocms_snippet',
+    'djangocms_style',
+)
+
+INSTALLED_APPS = (
+    # Tenents
+    'django_tenants',
+
+    # Apps
+    'customers',
+
     # CMS
     'djangocms_admin_style',
 
@@ -41,9 +88,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # CMS
-    'django.contrib.sites',
     'cms',
     'menus',
     'treebeard',
@@ -67,9 +114,13 @@ INSTALLED_APPS = [
     'djangocms_googlemap',
     'djangocms_snippet',
     'djangocms_style',
-]
+)
 
 MIDDLEWARE = [
+    # Tenent
+    'django_tenants.middleware.main.TenantMainMiddleware',
+
+    # Django
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -77,6 +128,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Cms
     'django.middleware.locale.LocaleMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
@@ -113,8 +166,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django_tenants.postgresql_backend',
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': 'mypassword',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -188,3 +245,10 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters'
 )
+
+# Django Tenant
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
+TENANT_MODEL = "customers.Client"  # app.Model
+TENANT_DOMAIN_MODEL = "customers.Domain"  # app.Model
